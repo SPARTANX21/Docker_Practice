@@ -1,0 +1,80 @@
+docker build .
+
+    REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+    <none>       <none>    76525cd74a19   8 seconds ago   1.47GB
+
+
+docker run -it 76525cd74a19
+    (1) Metric (m, kg) or (2) Non-Metric (ft, pounds)?
+    Please choose: 1
+    Please enter your height in meters
+    Your height: 5.8
+    Please enter your weight in kilograms
+    Your weight: 65
+    Your body-mass-index: 1.9322235434007133
+
+docker rm stoic_banzai hungry_hertz       
+    stoic_banzai
+    hungry_hertz
+
+docker build -t bmiapp:0 . 
+    [+] Building 4.2s (9/9) FINISHED                                              docker:desktop-linux
+
+docker images
+    REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+    bmiapp       0         749837844163   35 seconds ago   1.47GB
+    <none>       <none>    76525cd74a19   13 minutes ago   1.47GB
+
+docker run -it bmiapp:0 
+    (1) Metric (m, kg) or (2) Non-Metric (ft, pounds)?
+    Please choose: 1
+    Please enter your height in meters
+    Your height: 5.8
+    Please enter your weight in kilograms
+    Your weight: 65.3
+    Your body-mass-index: 1.941141498216409
+
+docker ps -a
+    CONTAINER ID   IMAGE      COMMAND           CREATED          STATUS                      PORTS     NAMES
+    a750187c0096   bmiapp:0   "python bmi.py"   28 seconds ago   Exited (0) 23 seconds ago             sharp_blackburn
+    9c60283b8dbe   bmiapp:0   "python bmi.py"   36 seconds ago   Exited (1) 39 seconds ago             wizardly_einstein
+
+docker run -it --rm bmiapp:0
+    (1) Metric (m, kg) or (2) Non-Metric (ft, pounds)?
+    Please choose: 1
+    Please enter your height in meters
+    Your height: 5.8
+    Please enter your weight in kilograms
+    Your weight: 65.3
+    Your body-mass-index: 1.941141498216409
+
+docker ps -a
+    CONTAINER ID   IMAGE      COMMAND           CREATED              STATUS                          PORTS     NAMES
+    a750187c0096   bmiapp:0   "python bmi.py"   About a minute ago   Exited (0) About a minute ago             sharp_blackburn
+    9c60283b8dbe   bmiapp:0   "python bmi.py"   About a minute ago   Exited (1) About a minute ago             wizardly_einstein
+
+docker rm sharp_blackburn wizardly_einstein
+    sharp_blackburn
+    wizardly_einstein
+
+docker ps -a
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+docker images
+    REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+    bmiapp       0         749837844163   5 minutes ago    1.47GB
+    <none>       <none>    76525cd74a19   19 minutes ago   1.47GB
+
+docker image prune
+    WARNING! This will remove all dangling images.
+    Are you sure you want to continue? [y/N] y
+    Deleted Images:
+    untagged: sha256:76525cd74a19b83c13d6c3728d0715e1876c4c221a6549e57fdc822cef898102
+    deleted: sha256:76525cd74a19b83c13d6c3728d0715e1876c4c221a6549e57fdc822cef898102
+    deleted: sha256:2b3a26a1574791b72430128847efda8c4ef526807f6205541f54c4154a35c29b
+    deleted: sha256:8ff84dc7210f2a61f3c42539ec91f7c877839923d98a3dbb1a79a75f91e3c03a
+    deleted: sha256:b4bdfc6a8b3f47bfd7273f39ba544e324d2b181cd7cfca3620cb09dc46a95fbe
+    deleted: sha256:48db645b415921fd2238a29388e97d90f26dbf597ba096117c553bd716d61912
+    deleted: sha256:1b76b5524a963b361d5b87c333387674b118f8885cca942c3b486af3b2af107c
+
+    Total reclaimed space: 11.34kB
